@@ -1,0 +1,57 @@
+## Scenario settings
+Scenario.name = Broadcast-%%DecisionEngineRouterImproved.decisionEngine%%-%%MovementModel.rngSeed%%-[Node = %%Group.nrofHosts%%, Buffer Size = %%Group.bufferSize%%]-M-S-15Min
+#Scenario.name = Broadcast-%%DecisionEngineRouter.decisionEngine%%-%%MovementModel.rngSeed%%-[Node = %%Group.nrofHosts%%, K = %%DecisionEngineRouter.rejectCount%%, Speed = %%Group.speed%%]
+#Scenario.name = Broadcast-%%DecisionEngineRouter.decisionEngine%%-%%MovementModel.rngSeed%%-[Node = %%Group.nrofHosts%%, Buffer Size = %%Group.bufferSize%%, K = %%DecisionEngineRouter.K%%]
+Scenario.simulateConnections = true
+Scenario.updateInterval = 0.1
+Scenario.endTime = 43200
+#43200
+#86400
+
+btInterface.type = SimpleBroadcastInterface
+btInterface.transmitSpeed = 250k
+btInterface.transmitRange = 10
+
+Scenario.nrofHostGroups = 1
+
+Group.movementModel = RandomWaypoint
+Group.router = DecisionEngineRouterImproved
+DecisionEngineRouterImproved.decisionEngine = estimator.MarkAndRecaptureRouter
+DecisionEngineRouterImproved.binaryMode = true
+DecisionEngineRouterImproved.initialMarking = 6
+
+Group.bufferSize = 10M
+Group.waitTime = 0, 120
+Group.nrofInterfaces = 1
+Group.interface1 = btInterface
+Group.speed = 2.5, 4.5
+Group.msgTtl = 120
+
+Group.nrofHosts = 500
+Group1.groupID = p
+
+Events.nrof = 1
+Events1.class = MessageEventGenerator
+Events1.interval = 250,300
+Events1.size = 50k,100k
+Events1.time = 0,70000
+Events1.hosts = 0,499
+Events1.prefix = M
+
+
+#MovementModel.rngSeed = [1;1;1;1;1;99;99;99;99;99;344;344;344;344;344;986;986;986;986;986;631;631;631;631;631]
+#MovementModel.rngSeed = [1;99;344;986;631]
+MovementModel.rngSeed = 1
+MovementModel.worldSize = 3000, 3000
+MovementModel.warmup = 1
+
+Report.nrofReports = 4
+Report.warmup = 0
+Report.reportDir = reports/Tester/
+Report.report1 = MessageDeliveredPerContactReport
+Report.report2 = OverheadPerContactReport
+Report.report3 = LatencyPerContactReport
+Report.report4 = MessageStatsReport
+
+Optimization.cellSizeMult = 5
+Optimization.randomizeUpdateOrder = true
