@@ -8,3 +8,5 @@ The ONE is a Opportunistic Network Environment simulator which provides a
 powerful tool for generating mobility traces, running DTN messaging
 simulations with different routing protocols, and visualizing both
 simulations interactively in real-time and results after their completion.
+
+This project is using Java Programming Language.
